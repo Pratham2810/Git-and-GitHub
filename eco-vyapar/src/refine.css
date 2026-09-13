@@ -1,0 +1,477 @@
+:root {
+  --readable-micro: 10.5px;
+  --readable-small: 12px;
+}
+
+/* Remove the older floating journey module completely. */
+.eco-journey-progress {
+  display: none !important;
+}
+
+/* Full, organized desktop header. */
+.nav {
+  width: min(1360px, calc(100% - 28px));
+  min-height: 62px;
+  grid-template-columns: auto minmax(0, 1fr) auto !important;
+  gap: clamp(16px, 2vw, 30px);
+  padding: 9px 12px 9px 14px;
+  border-radius: 18px;
+}
+
+.nav .brand {
+  min-width: 154px;
+  white-space: nowrap;
+}
+
+.nav nav {
+  justify-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(10px, 1.25vw, 20px);
+  min-width: 0;
+}
+
+.nav nav a {
+  position: relative;
+  white-space: nowrap;
+  font-size: 11.5px !important;
+  font-weight: 720 !important;
+  letter-spacing: -0.01em;
+  padding: 9px 0;
+}
+
+.nav nav a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 3px;
+  height: 1px;
+  transform: scaleX(0);
+  transform-origin: center;
+  background: var(--accent);
+  transition: transform 0.22s ease;
+}
+
+.nav nav a:hover::after,
+.nav nav a.active::after {
+  transform: scaleX(1);
+}
+
+.nav-actions {
+  min-width: max-content;
+}
+
+.menu-toggle {
+  margin-left: 2px;
+}
+
+/* Hero: use the lower region as a complete five-stage story board. */
+.hero-stage-copy {
+  bottom: 138px !important;
+}
+
+.hero-stage-copy span {
+  font-size: 10.5px !important;
+}
+
+.hero-stage-rail {
+  bottom: 24px !important;
+  border-top: 0 !important;
+  gap: 8px !important;
+}
+
+.hero-stage-rail span {
+  position: relative;
+  min-height: 82px;
+  padding: 13px 14px !important;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 10px;
+  align-content: center;
+  border: 1px solid var(--border-soft);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--surface-2) 70%, transparent);
+  backdrop-filter: blur(12px);
+  font-family: var(--font-body) !important;
+  transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+}
+
+.hero-stage-rail span::before {
+  display: none !important;
+}
+
+.hero-stage-rail span b {
+  grid-row: 1 / 3;
+  align-self: center;
+  font-family: var(--font-display);
+  font-size: 24px;
+  line-height: 1;
+  color: var(--text-faint);
+}
+
+.hero-stage-rail span small {
+  font-size: 11px;
+  line-height: 1.2;
+  font-weight: 760;
+  color: var(--text-main);
+}
+
+.hero-stage-rail span em {
+  font-size: 9.5px;
+  line-height: 1.2;
+  font-style: normal;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.hero-stage-rail span.active {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--accent) 52%, var(--border-soft));
+  background: color-mix(in srgb, var(--accent) 10%, var(--surface-2));
+}
+
+.hero-stage-rail span.active b,
+.hero-stage-rail span.active em {
+  color: var(--accent);
+}
+
+/* Make small UI copy genuinely readable. */
+.eyebrow,
+.data-provenance span,
+.chart-title span,
+.console-grid i,
+.console-header,
+.kpi-grid span,
+.horizon-total span,
+.score-radar-wrap > span,
+.score-roadmap span,
+.decision-head,
+.impact-pile-card > div:first-child,
+#readinessLabel,
+.lab-kicker,
+.tradeoff span,
+.scene-hud small,
+.hero-profile span,
+.hero-profile small {
+  font-size: var(--readable-micro) !important;
+}
+
+.kpi-grid p,
+.console-grid span,
+.chart-footnote,
+.chart-legend,
+.horizon-controls button,
+.score-roadmap b,
+.decision-options button,
+.decision-outcome b,
+.panel small,
+.champions small,
+.trust-grid p,
+.insight-track p {
+  font-size: var(--readable-small) !important;
+}
+
+.decision-outcome span {
+  font-size: 9.5px !important;
+}
+
+/* Dashboard: pair every graph with interpretation instead of leaving dead space. */
+.dashboard-grid {
+  align-items: stretch;
+}
+
+.chart-card {
+  min-height: 0 !important;
+}
+
+.chart-card-split .chart-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(190px, 0.85fr);
+  gap: 18px;
+  align-items: stretch;
+  margin-top: 8px;
+}
+
+.chart-card-split .chart-stage {
+  min-height: 235px !important;
+  display: grid;
+  align-content: center;
+}
+
+.chart-insight,
+.horizon-insight {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  padding: 18px;
+  border: 1px solid var(--border-soft);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--surface-3) 58%, transparent);
+}
+
+.chart-insight > span,
+.horizon-insight > span {
+  font-size: 10px;
+  font-weight: 820;
+  letter-spacing: 0.13em;
+  color: var(--accent);
+}
+
+.chart-insight strong {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3vw, 42px);
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.chart-insight p,
+.horizon-insight p {
+  margin: 0;
+  color: var(--text-soft);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.chart-insight small,
+.horizon-insight small {
+  color: var(--text-faint) !important;
+  font-size: 11px !important;
+  line-height: 1.45;
+}
+
+.horizon-card {
+  display: block !important;
+}
+
+.horizon-card .chart-title {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.horizon-controls {
+  float: right;
+  margin-top: 2px;
+}
+
+.horizon-layout {
+  clear: both;
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(250px, 0.65fr);
+  gap: 18px;
+  align-items: stretch;
+  padding-top: 16px;
+}
+
+.horizon-layout .chart-stage {
+  min-height: 250px !important;
+}
+
+.horizon-insight b {
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--text-main);
+}
+
+.horizon-insight > div {
+  display: grid;
+  gap: 6px;
+}
+
+/* Fill formerly underused two-column sections with project context. */
+.section-support-grid {
+  display: grid;
+  gap: 8px;
+  margin-top: 22px;
+}
+
+.section-support-grid article,
+.consumer-note {
+  padding: 14px 15px;
+  border: 1px solid var(--border-soft);
+  border-radius: 13px;
+  background: color-mix(in srgb, var(--surface-2) 72%, transparent);
+}
+
+.section-support-grid span,
+.consumer-note span {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 9.5px;
+  font-weight: 820;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+}
+
+.section-support-grid b,
+.consumer-note b {
+  display: block;
+  font-size: 13px;
+  color: var(--text-main);
+}
+
+.section-support-grid p,
+.consumer-note p {
+  margin: 5px 0 0;
+  color: var(--text-soft);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.scenario-support {
+  grid-template-columns: 1fr 1fr;
+}
+
+.scenario-support article:last-child {
+  grid-column: 1 / -1;
+}
+
+.pledge-support {
+  grid-template-columns: 1fr 1fr;
+}
+
+.consumer-copy {
+  margin-bottom: 10px;
+}
+
+.consumer-note {
+  margin-top: 14px;
+}
+
+.champions {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 14px;
+}
+
+.champions article {
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.champions .recognition-standard {
+  background: color-mix(in srgb, var(--accent) 7%, var(--surface-2));
+}
+
+.champions .recognition-standard > b {
+  color: var(--accent);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+}
+
+/* General density fixes. */
+.panel,
+.chart-card,
+.lab-console,
+.sim-visual,
+.form,
+.calc {
+  border-radius: 18px;
+}
+
+.scorebox {
+  align-items: stretch;
+}
+
+.result {
+  justify-content: flex-start !important;
+  padding-top: 30px !important;
+}
+
+.score-radar-wrap svg {
+  max-height: 245px !important;
+}
+
+@media (max-width: 1180px) {
+  .nav nav {
+    gap: 10px;
+  }
+
+  .nav nav a {
+    font-size: 10.5px !important;
+  }
+
+  .chart-card-split .chart-body,
+  .horizon-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .champions {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  .recognition-standard {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 1000px) {
+  .nav {
+    grid-template-columns: 1fr auto auto !important;
+  }
+
+  .nav nav {
+    justify-self: stretch;
+  }
+}
+
+@media (max-width: 680px) {
+  .hero-stage-copy {
+    bottom: 170px !important;
+  }
+
+  .hero-stage-rail {
+    left: 14px !important;
+    right: 14px !important;
+    bottom: 14px !important;
+    grid-template-columns: repeat(5, minmax(108px, 1fr)) !important;
+    overflow-x: auto;
+    padding-bottom: 3px;
+    scrollbar-width: none;
+  }
+
+  .hero-stage-rail::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hero-stage-rail span,
+  .hero-stage-rail span.active {
+    display: grid !important;
+    min-height: 68px;
+    padding: 10px !important;
+    transform: none;
+  }
+
+  .hero-stage-rail span b {
+    font-size: 19px;
+  }
+
+  .hero-stage-rail span small {
+    font-size: 10px;
+  }
+
+  .hero-stage-rail span em {
+    display: none;
+  }
+
+  .scenario-support,
+  .pledge-support,
+  .champions {
+    grid-template-columns: 1fr !important;
+  }
+
+  .scenario-support article:last-child,
+  .recognition-standard {
+    grid-column: auto;
+  }
+
+  .horizon-controls {
+    float: none;
+    margin-top: 12px;
+  }
+}
