@@ -39,7 +39,7 @@ Expected: The daily scenario result is 30, the Impact Horizon chart updates, and
 ## Test 4 - Persist the coherent light theme after reload
 Viewport: mobile
 Covers: light/dark theme toggle, local theme persistence, responsive navigation, low-power parallax fallback
-Description: Verifies the intentional light theme remains visually coherent on mobile, persists between visits, and keeps navigation usable without relying on heavy desktop parallax.
+Description: Verifies the intentional light theme remains visually coherent on mobile, persists between visits, and keeps navigation usable while the heavier 3D/parallax treatment gracefully simplifies for smaller devices.
 
 Steps:
 1. Use the theme toggle to switch to Light

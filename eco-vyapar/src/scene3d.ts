@@ -6,15 +6,18 @@ export function initEcoWorld() {
   const canvas = document.querySelector<HTMLCanvasElement>('#ecoWorld');
   const hero = document.querySelector<HTMLElement>('.hero');
   if (!canvas || !hero) return;
+  const mobile = window.innerWidth < 800;
+  const lowPower = navigator.hardwareConcurrency !== undefined && navigator.hardwareConcurrency <= 4;
   let renderer: THREE.WebGLRenderer;
   try {
-    renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
+    renderer = new THREE.WebGLRenderer({ canvas, antialias: !mobile && !lowPower, alpha: true, powerPreference: 'high-performance' });
   } catch {
     canvas.closest('.scene3d')?.classList.add('webgl-fallback');
     return;
   }
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, window.innerWidth < 700 ? 1.1 : 1.55));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, mobile ? 1 : lowPower ? 1.05 : 1.35));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
+
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
   camera.position.set(6.2, 4.2, 8.4);
@@ -22,6 +25,7 @@ export function initEcoWorld() {
   const world = new THREE.Group();
   world.rotation.y = -0.35;
   scene.add(world);
+
   const palette = {
     dark: { platform: 0x10281d, building: 0x143d2b, accent: 0xc7e36a, leaf: 0x5d9a67, neutral: 0xdfe8e0, particle: 0xb9da76 },
     light: { platform: 0xdce8dd, building: 0xf7faf5, accent: 0x4e7d35, leaf: 0x4c8a58, neutral: 0x6f8176, particle: 0x5f8b42 },
@@ -34,6 +38,7 @@ export function initEcoWorld() {
   const plasticMat = new THREE.MeshStandardMaterial({ color: 0xc66b67, roughness: 0.4, transparent: true, opacity: 0.85 });
   const paperMat = new THREE.MeshStandardMaterial({ color: 0xc9b998, roughness: 0.7 });
   const blueMat = new THREE.MeshStandardMaterial({ color: 0x72aaa0, roughness: 0.5 });
+
   const platform = new THREE.Mesh(new THREE.CylinderGeometry(3.45, 3.8, 0.38, 64), platformMat);
   platform.position.y = -1.25;
   world.add(platform);
@@ -57,6 +62,7 @@ export function initEcoWorld() {
     shop.add(product);
   }
   world.add(shop);
+
   const plasticGroup = new THREE.Group();
   for (let index = 0; index < 6; index += 1) {
     const plastic = new THREE.Mesh(new THREE.BoxGeometry(0.28, 0.44, 0.055), plasticMat);
@@ -64,6 +70,7 @@ export function initEcoWorld() {
     plasticGroup.add(plastic);
   }
   world.add(plasticGroup);
+
   const reusableGroup = new THREE.Group();
   const tote = new THREE.Mesh(new THREE.BoxGeometry(1.0, 1.2, 0.24), accentMat);
   reusableGroup.add(tote);
@@ -74,6 +81,7 @@ export function initEcoWorld() {
   reusableGroup.position.set(-2.1, -0.15, 1.0);
   reusableGroup.rotation.y = 0.35;
   world.add(reusableGroup);
+
   const paperGroup = new THREE.Group();
   for (let index = 0; index < 3; index += 1) {
     const bag = new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.65, 0.18), paperMat);
@@ -81,6 +89,7 @@ export function initEcoWorld() {
     paperGroup.add(bag);
   }
   world.add(paperGroup);
+
   const wasteGroup = new THREE.Group();
   [0x4c8a58, 0x7399a5].forEach((color, index) => {
     const bin = new THREE.Mesh(new THREE.CylinderGeometry(0.21, 0.25, 0.62, 18), new THREE.MeshStandardMaterial({ color }));
@@ -88,6 +97,7 @@ export function initEcoWorld() {
     wasteGroup.add(bin);
   });
   world.add(wasteGroup);
+
   const solarGroup = new THREE.Group();
   for (let index = 0; index < 3; index += 1) {
     const panel = new THREE.Mesh(new THREE.BoxGeometry(0.95, 0.05, 0.62), blueMat);
@@ -96,9 +106,11 @@ export function initEcoWorld() {
     solarGroup.add(panel);
   }
   world.add(solarGroup);
+
   const signage = new THREE.Mesh(new THREE.BoxGeometry(1.45, 0.58, 0.07), accentMat);
   signage.position.set(0.2, 1.0, 1.54);
   world.add(signage);
+
   const peopleGroup = new THREE.Group();
   [-1, 0.3, 1.25].forEach((x, index) => {
     const person = new THREE.Group();
@@ -112,6 +124,7 @@ export function initEcoWorld() {
     peopleGroup.add(person);
   });
   world.add(peopleGroup);
+
   const treePositions = [[2.2, -0.95, -1.4], [-2.3, -0.95, -1.55], [2.5, -0.95, 1.35]];
   treePositions.forEach(([x, y, z], index) => {
     const tree = new THREE.Group();
@@ -124,11 +137,13 @@ export function initEcoWorld() {
     tree.position.set(x, y, z);
     world.add(tree);
   });
+
   const haloMat = new THREE.MeshBasicMaterial({ transparent: true, opacity: 0.42 });
   const halo = new THREE.Mesh(new THREE.TorusGeometry(4.15, 0.018, 8, 160), haloMat);
   halo.rotation.x = Math.PI / 2.2;
   halo.position.y = -0.2;
   world.add(halo);
+
   const networkGroup = new THREE.Group();
   const nodeGeometry = new THREE.SphereGeometry(0.1, 12, 10);
   const nodeMaterial = new THREE.MeshBasicMaterial({ color: 0xc7e36a });
@@ -151,7 +166,8 @@ export function initEcoWorld() {
   lineGeometry.setAttribute('position', new THREE.Float32BufferAttribute(linePositions, 3));
   networkGroup.add(new THREE.LineSegments(lineGeometry, new THREE.LineBasicMaterial({ color: 0xc7e36a, transparent: true, opacity: 0.34 })));
   world.add(networkGroup);
-  const particleCount = window.innerWidth < 700 ? 90 : 180;
+
+  const particleCount = mobile ? 48 : lowPower ? 72 : 120;
   const positions = new Float32Array(particleCount * 3);
   for (let index = 0; index < particleCount; index += 1) {
     const radius = 4.4 + Math.random() * 2.4;
@@ -165,6 +181,7 @@ export function initEcoWorld() {
   const particleMat = new THREE.PointsMaterial({ size: 0.035, transparent: true, opacity: 0.55 });
   const particles = new THREE.Points(particleGeo, particleMat);
   scene.add(particles);
+
   scene.add(new THREE.HemisphereLight(0xdfffe8, 0x142218, 2.1));
   const key = new THREE.DirectionalLight(0xffffff, 4.2);
   key.position.set(4, 7, 5);
@@ -172,10 +189,12 @@ export function initEcoWorld() {
   const rim = new THREE.PointLight(0xc7e36a, 28, 14, 2);
   rim.position.set(-4, 2.5, 4);
   scene.add(rim);
+
   let selectedMaterial: MaterialKey = 'no-bag';
   let simulatorConfig: Record<string, boolean | number> = {};
   let heroProgress = 0;
   let stage = 0;
+
   const applyStage = () => {
     plasticGroup.visible = stage <= 1 || simulatorConfig.plastic === true;
     reusableGroup.visible = stage >= 2 || simulatorConfig.reusable === true || selectedMaterial === 'reusable';
@@ -190,6 +209,7 @@ export function initEcoWorld() {
     const stageRail = document.querySelectorAll('#heroStageRail span');
     stageRail.forEach((item, index) => item.classList.toggle('active', index === stage));
   };
+
   window.addEventListener('eco-material-change', (event: Event) => {
     selectedMaterial = (event as CustomEvent<{ material: MaterialKey }>).detail.material;
     applyStage();
@@ -198,6 +218,7 @@ export function initEcoWorld() {
     simulatorConfig = (event as CustomEvent<Record<string, boolean | number>>).detail;
     applyStage();
   });
+
   const applyPalette = () => {
     const mode = document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
     const p = palette[mode];
@@ -213,6 +234,7 @@ export function initEcoWorld() {
   };
   applyPalette();
   new MutationObserver(applyPalette).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
   const pointer = { x: 0, y: 0 };
   canvas.addEventListener('pointermove', event => {
     const rect = canvas.getBoundingClientRect();
@@ -220,6 +242,7 @@ export function initEcoWorld() {
     pointer.y = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
   });
   canvas.addEventListener('pointerleave', () => { pointer.x = 0; pointer.y = 0; });
+
   const updateScroll = () => {
     const rect = hero.getBoundingClientRect();
     const scrollable = Math.max(1, hero.offsetHeight - window.innerHeight);
@@ -229,6 +252,7 @@ export function initEcoWorld() {
   };
   window.addEventListener('scroll', updateScroll, { passive: true });
   updateScroll();
+
   const resize = () => {
     const rect = canvas.getBoundingClientRect();
     const width = Math.max(1, rect.width);
@@ -239,9 +263,16 @@ export function initEcoWorld() {
   };
   new ResizeObserver(resize).observe(canvas);
   resize();
+
+  let heroVisible = true;
+  let pageVisible = !document.hidden;
+  new IntersectionObserver(entries => { heroVisible = entries[0]?.isIntersecting ?? true; }, { rootMargin: '20% 0px 20% 0px' }).observe(hero);
+  document.addEventListener('visibilitychange', () => { pageVisible = !document.hidden; });
+
   const clock = new THREE.Clock();
   const animate = () => {
     requestAnimationFrame(animate);
+    if (!heroVisible || !pageVisible) return;
     const time = clock.getElapsedTime();
     const motionOff = document.body.dataset.motion === 'reduced';
     const targetY = -0.35 + pointer.x * 0.16 + heroProgress * 0.45;

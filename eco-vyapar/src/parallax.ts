@@ -50,19 +50,20 @@ export function initParallaxExperience() {
     ]);
     gsap.registerPlugin(ScrollTrigger);
 
-    const lenis = new Lenis({ duration: 1.05, smoothWheel: true, wheelMultiplier: 0.92, touchMultiplier: 1 });
+    ScrollTrigger.config({ limitCallbacks: true, ignoreMobileResize: true });
+    const lenis = new Lenis({ duration: 0.9, smoothWheel: true, wheelMultiplier: 0.9, touchMultiplier: 1 });
     lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.add(time => lenis.raf(time * 1000));
     gsap.ticker.lagSmoothing(0);
 
     gsap.to('.hero-grid > div:first-child', {
-      yPercent: -12,
+      yPercent: -16,
       ease: 'none',
       scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1.1 },
     });
-    gsap.fromTo('.scene3d', { yPercent: -4, scale: 1.025 }, {
-      yPercent: 18,
-      scale: 0.965,
+    gsap.fromTo('.scene3d', { yPercent: -6, scale: 1.03 }, {
+      yPercent: 22,
+      scale: 0.95,
       ease: 'none',
       scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1.2 },
     });
@@ -75,10 +76,9 @@ export function initParallaxExperience() {
     });
 
     document.querySelectorAll<HTMLElement>('.section h2, .section .eyebrow, .section .lead').forEach(element => {
-      gsap.fromTo(element, { y: 34, opacity: 0, filter: 'blur(7px)' }, {
+      gsap.fromTo(element, { y: 26, opacity: 0 }, {
         y: 0,
         opacity: 1,
-        filter: 'blur(0px)',
         duration: .8,
         ease: 'power3.out',
         scrollTrigger: { trigger: element, start: 'top 86%', once: true },
