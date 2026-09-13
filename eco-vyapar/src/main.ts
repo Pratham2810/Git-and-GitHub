@@ -7,6 +7,7 @@ import './dashboard.css';
 import './simulator.css';
 import './award.css';
 import './upgrade.css';
+import './refine.css';
 import { initEcoWorld } from './scene3d';
 import { initFutureUI } from './future';
 import { initExperienceShell } from './experience';
