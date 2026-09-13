@@ -38,7 +38,7 @@ Expected: The daily scenario result is 30, the annual avoided estimate is 10,950
 
 ## Test 4 - Persist the coherent light theme on mobile
 Viewport: mobile
-Covers: light/dark theme toggle, local theme persistence, responsive navigation, compact ECO transformation progress, low-power 3D/parallax fallback
+Covers: light/dark theme toggle, local theme persistence, responsive navigation, five-stage hero strip, low-power 3D/parallax fallback
 Description: Verifies the intentionally designed light theme persists and the mobile experience remains usable without relying on heavy desktop effects.
 
 Steps:
@@ -46,7 +46,7 @@ Steps:
 2. Refresh and scroll through Impact, Green Score and the Retail Decision Simulator
 3. Open the mobile navigation menu
 
-Expected: The website remains in Light theme, viewed sections stay in the warm eco-light visual system, the compact transformation progress is visible, and navigation remains usable.
+Expected: The website remains in Light theme, viewed sections stay in the warm eco-light visual system, all five hero stages remain accessible in the hero strip, and navigation remains usable.
 
 ## Test 5 - Submit the voluntary sustainability pledge
 Viewport: desktop
