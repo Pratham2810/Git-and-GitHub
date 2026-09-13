@@ -6,12 +6,14 @@ import './experience.css';
 import './dashboard.css';
 import './simulator.css';
 import './award.css';
+import './upgrade.css';
 import { initEcoWorld } from './scene3d';
 import { initFutureUI } from './future';
 import { initExperienceShell } from './experience';
 import { initDataVisuals } from './charts';
 import { initGreenStoreSimulator } from './simulator3d';
 import { initParallaxExperience } from './parallax';
+import { initUpgradeLayer } from './upgrade';
 
 const questions = [
   'Avoid unnecessary plastic bags',
@@ -154,3 +156,4 @@ initFutureUI();
 initDataVisuals();
 initGreenStoreSimulator();
 initParallaxExperience();
+initUpgradeLayer();

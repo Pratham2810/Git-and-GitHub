@@ -192,22 +192,28 @@ export function initEcoWorld() {
 
   let selectedMaterial: MaterialKey = 'no-bag';
   let simulatorConfig: Record<string, boolean | number> = {};
+  let scoreConfig: Record<string, boolean> = {};
   let heroProgress = 0;
   let stage = 0;
+  let announcedStage = -1;
 
   const applyStage = () => {
-    plasticGroup.visible = stage <= 1 || simulatorConfig.plastic === true;
-    reusableGroup.visible = stage >= 2 || simulatorConfig.reusable === true || selectedMaterial === 'reusable';
-    paperGroup.visible = stage >= 2 || simulatorConfig.paper === true || selectedMaterial === 'paper';
-    wasteGroup.visible = stage >= 2 || simulatorConfig.waste === true;
+    plasticGroup.visible = (stage <= 1 && scoreConfig.plastic !== false) || simulatorConfig.plastic === true || scoreConfig.plastic === true;
+    reusableGroup.visible = stage >= 2 || simulatorConfig.reusable === true || scoreConfig.reusable === true || selectedMaterial === 'reusable';
+    paperGroup.visible = stage >= 2 || simulatorConfig.paper === true || scoreConfig.paper === true || selectedMaterial === 'paper';
+    wasteGroup.visible = stage >= 2 || simulatorConfig.waste === true || scoreConfig.waste === true;
     solarGroup.visible = stage >= 3 || simulatorConfig.energy === true;
-    signage.visible = stage >= 1 || simulatorConfig.awareness === true;
+    signage.visible = stage >= 1 || simulatorConfig.awareness === true || scoreConfig.awareness === true;
     peopleGroup.visible = stage >= 3;
     networkGroup.visible = stage >= 4;
     networkGroup.scale.setScalar(0.72 + Math.max(0, heroProgress - 0.72) * 1.2);
     plasticMat.opacity = stage === 0 ? 0.9 : 0.42;
     const stageRail = document.querySelectorAll('#heroStageRail span');
     stageRail.forEach((item, index) => item.classList.toggle('active', index === stage));
+    if (announcedStage !== stage) {
+      announcedStage = stage;
+      window.dispatchEvent(new CustomEvent('eco-hero-stage', { detail: { stage } }));
+    }
   };
 
   window.addEventListener('eco-material-change', (event: Event) => {
@@ -216,6 +222,11 @@ export function initEcoWorld() {
   });
   window.addEventListener('eco-store-config', (event: Event) => {
     simulatorConfig = (event as CustomEvent<Record<string, boolean | number>>).detail;
+    applyStage();
+  });
+  window.addEventListener('eco-score-update', (event: Event) => {
+    const answers = (event as CustomEvent<{ answers: boolean[] }>).detail.answers;
+    scoreConfig = { plastic: !answers[0], paper: answers[1], reusable: answers[2], packaging: answers[3], waste: answers[4], awareness: answers[5] };
     applyStage();
   });
 

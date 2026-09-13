@@ -1,9 +1,9 @@
 # Tests
 
-## Test 1 - Complete Green Score 2.0 and inspect recommendations [sanity]
+## Test 1 - Complete Green Score 3.0 and inspect connected feedback [sanity]
 Viewport: desktop
-Covers: Green Score interaction, score category, radar chart, recommendations, Intelligence Console synchronization
-Description: Verifies the primary sustainability self-assessment updates all connected visual feedback without presenting the score as certification.
+Covers: Green Score interaction, score category, radar chart, recommendations, Intelligence Console synchronization, 3D score event
+Description: Verifies the primary sustainability self-assessment updates the connected score experience while retaining educational non-certification framing.
 
 Steps:
 1. Scroll to "How green is your shop?"
@@ -12,41 +12,41 @@ Steps:
 
 Expected: The score reads 67, the category reads "Green Retailer", the radar chart visibly updates, and the Intelligence Console Green Score reads 67.
 
-## Test 2 - Configure the 3D Green Store simulator
+## Test 2 - Compare checkout-counter decisions
 Viewport: desktop
-Covers: 3D retail transformation simulator, feature toggles, educational Green Readiness Score
-Description: Verifies store interventions alter the simulator state and calculate an educational readiness score.
+Covers: Retail Decision Simulator, scenario labeling, packaging trade-off explanations
+Description: Verifies the new decision simulator changes its operational and ethical guidance without showing unsupported carbon figures.
 
 Steps:
-1. Scroll to "Build your green store."
-2. Turn off Plastic bags and turn on Paper alternatives, Reusable encouragement, Waste segregation and Efficient lighting
-3. Observe the toggle states and Green Readiness score
+1. Scroll to "What happens at the checkout counter?"
+2. Select "Reusable bag"
+3. Select "No bag"
 
-Expected: The selected controls show ON, Plastic bags shows OFF, and the Green Readiness score is greater than 50 with the label "/100 · educational scenario" visible.
+Expected: The outcome cards update for each choice, including Immediate convenience, Reuse potential, Packaging requirement, Waste implication and Ethical consideration, while the section remains labeled as a scenario.
 
-## Test 3 - Change scenario inputs and impact horizon
+## Test 3 - Change one-shop impact scenario and annual bag-pile visual
 Viewport: desktop
-Covers: scenario calculator, dashboard Impact Horizon chart, scenario-vs-observed labeling
-Description: Verifies scenario analytics respond to calculator inputs while clearly identifying them as estimates.
+Covers: scenario calculator, one-shop-to-one-year visual, dashboard Impact Horizon chart, scenario-vs-observed labeling
+Description: Verifies the calculator and visual bag pile respond to scenario inputs while clearly identifying estimates as non-observed outcomes.
 
 Steps:
 1. Set Customers per day to 100, Plastic bags per day to 60 and Reduction target to 50
-2. Scroll to the Field Impact Dashboard and select Annual in Impact Horizon
-3. Inspect the scenario chart and its note
+2. Inspect the "ONE SHOP → ONE YEAR" visual scenario
+3. Scroll to the Field Impact Dashboard and select Annual in Impact Horizon
 
-Expected: The daily scenario result is 30, the Impact Horizon chart updates, and the text "Scenario estimate — not an observed field outcome." remains visible.
+Expected: The daily scenario result is 30, the annual avoided estimate is 10,950, the bag pile visibly reduces, and "Scenario estimate — not an observed field outcome." remains visible on the dashboard.
 
-## Test 4 - Persist the coherent light theme after reload
+## Test 4 - Persist the coherent light theme on mobile
 Viewport: mobile
-Covers: light/dark theme toggle, local theme persistence, responsive navigation, low-power parallax fallback
-Description: Verifies the intentional light theme remains visually coherent on mobile, persists between visits, and keeps navigation usable while the heavier 3D/parallax treatment gracefully simplifies for smaller devices.
+Covers: light/dark theme toggle, local theme persistence, responsive navigation, compact ECO transformation progress, low-power 3D/parallax fallback
+Description: Verifies the intentionally designed light theme persists and the mobile experience remains usable without relying on heavy desktop effects.
 
 Steps:
 1. Use the theme toggle to switch to Light
-2. Refresh the page and scroll through Impact, Green Score and Ethics
+2. Refresh and scroll through Impact, Green Score and the Retail Decision Simulator
 3. Open the mobile navigation menu
 
-Expected: The website remains in Light theme after refresh, the viewed sections use the same warm light visual system without dark-mode card breaks, and the mobile menu reveals links including Dashboard and Retail Lab.
+Expected: The website remains in Light theme, viewed sections stay in the warm eco-light visual system, the compact transformation progress is visible, and navigation remains usable.
 
 ## Test 5 - Submit the voluntary sustainability pledge
 Viewport: desktop
