@@ -1,13 +1,17 @@
+import '@fontsource-variable/manrope';
+import '@fontsource-variable/syne';
 import './styles.css';
 import './future.css';
 import './experience.css';
 import './dashboard.css';
 import './simulator.css';
+import './award.css';
 import { initEcoWorld } from './scene3d';
 import { initFutureUI } from './future';
 import { initExperienceShell } from './experience';
 import { initDataVisuals } from './charts';
 import { initGreenStoreSimulator } from './simulator3d';
+import { initParallaxExperience } from './parallax';
 
 const questions = [
   'Avoid unnecessary plastic bags',
@@ -149,3 +153,4 @@ initEcoWorld();
 initFutureUI();
 initDataVisuals();
 initGreenStoreSimulator();
+initParallaxExperience();

@@ -36,17 +36,17 @@ Steps:
 
 Expected: The daily scenario result is 30, the Impact Horizon chart updates, and the text "Scenario estimate — not an observed field outcome." remains visible.
 
-## Test 4 - Persist light theme after reload
+## Test 4 - Persist the coherent light theme after reload
 Viewport: mobile
-Covers: light/dark theme toggle, local theme persistence, responsive navigation
-Description: Verifies the intentional light theme can be selected on mobile and persists between visits.
+Covers: light/dark theme toggle, local theme persistence, responsive navigation, low-power parallax fallback
+Description: Verifies the intentional light theme remains visually coherent on mobile, persists between visits, and keeps navigation usable without relying on heavy desktop parallax.
 
 Steps:
 1. Use the theme toggle to switch to Light
-2. Refresh the page
+2. Refresh the page and scroll through Impact, Green Score and Ethics
 3. Open the mobile navigation menu
 
-Expected: The website remains in Light theme after refresh and the mobile menu reveals links including Dashboard and Retail Lab.
+Expected: The website remains in Light theme after refresh, the viewed sections use the same warm light visual system without dark-mode card breaks, and the mobile menu reveals links including Dashboard and Retail Lab.
 
 ## Test 5 - Submit the voluntary sustainability pledge
 Viewport: desktop
