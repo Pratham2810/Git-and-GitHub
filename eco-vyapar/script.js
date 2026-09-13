@@ -1,1 +1,1 @@
-document.querySelectorAll('[data-count]').forEach((el)=>{el.textContent=el.dataset.count;});
+const css=document.createElement('link');css.rel='stylesheet';css.href='components.css';document.head.appendChild(css);document.querySelectorAll('[data-count]').forEach((el)=>{el.textContent=el.dataset.count;});
