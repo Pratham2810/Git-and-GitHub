@@ -14,9 +14,9 @@ const dashboardMarkup = `
       <article><span>OBSERVED</span><strong>2</strong><p>Retailers recognised</p></article>
     </div>
     <div class='dashboard-grid'>
-      <article class='chart-card'><div class='chart-title'><span>OBSERVED DATA</span><h3>Bag usage distribution</h3></div><div id='bagDonut' class='chart-stage' aria-label='Donut chart showing four plastic users and two alternative users'></div></article>
-      <article class='chart-card'><div class='chart-title'><span>OBSERVED DATA</span><h3>Retail observation</h3></div><div id='retailBars' class='chart-stage' aria-label='Bar chart comparing four plastic users with two alternative users'></div></article>
-      <article class='chart-card horizon-card'><div class='chart-title'><span>SCENARIO ESTIMATE</span><h3>Impact horizon</h3></div><div class='horizon-controls' id='horizonControls'><button class='active' data-horizon='daily'>Daily</button><button data-horizon='monthly'>Monthly</button><button data-horizon='annual'>Annual</button></div><div id='horizonChart' class='chart-stage' aria-label='Scenario chart showing estimated avoided plastic bags'></div><small>Scenario estimate — not an observed field outcome.</small></article>
+      <article class='chart-card chart-card-split'><div class='chart-title'><span>OBSERVED DATA</span><h3>Bag usage distribution</h3></div><div class='chart-body'><div id='bagDonut' class='chart-stage' aria-label='Donut chart showing four plastic users and two alternative users'></div><aside class='chart-insight'><span>WHAT THIS MEANS</span><strong>4 of 6</strong><p>Observed retailers were using plastic carry bags at the time of the field visit.</p><small>Two retailers already demonstrated that alternatives are locally possible.</small></aside></div></article>
+      <article class='chart-card chart-card-split'><div class='chart-title'><span>OBSERVED DATA</span><h3>Retail observation</h3></div><div class='chart-body'><div id='retailBars' class='chart-stage' aria-label='Bar chart comparing four plastic users with two alternative users'></div><aside class='chart-insight'><span>LOCAL SIGNAL</span><strong>2 retailers</strong><p>Paper or biodegradable alternatives were already observed in the six-shop sample.</p><small>The project therefore focuses on encouraging transition, not claiming alternatives are absent.</small></aside></div></article>
+      <article class='chart-card horizon-card'><div class='chart-title'><span>SCENARIO ESTIMATE</span><h3>Impact horizon</h3></div><div class='horizon-controls' id='horizonControls'><button class='active' data-horizon='daily'>Daily</button><button data-horizon='monthly'>Monthly</button><button data-horizon='annual'>Annual</button></div><div class='horizon-layout'><div id='horizonChart' class='chart-stage' aria-label='Scenario chart showing estimated avoided plastic bags'></div><aside class='horizon-insight'><span>MODEL LOGIC</span><b>Customers × bag use × reduction target</b><p>The calculator uses the smaller of customers/day and bags/day before applying the selected reduction target.</p><div><small>✓ No carbon conversion</small><small>✓ No city-wide extrapolation</small><small>✓ Scenario only</small></div></aside></div><small>Scenario estimate — not an observed field outcome.</small></article>
     </div>
     <div class='intelligence-console'>
       <div class='console-header'><span>ECO VYAPAR INTELLIGENCE CONSOLE</span><b>ETHICS-LOCKED</b></div>
@@ -117,7 +117,7 @@ export function initExperienceShell() {
     window.setTimeout(close, 1600);
   }
 
-  document.body.insertAdjacentHTML('beforeend', `<div class='eco-cursor' aria-hidden='true'><i></i><b></b></div><aside class='eco-journey-progress' aria-label='ECO transformation progress'><b id='journeyCompact'>01 / 07 — Observe</b><div><span data-step='0'>Observe</span><span data-step='1'>Understand</span><span data-step='2'>Measure</span><span data-step='3'>Improve</span><span data-step='4'>Participate</span><span data-step='5'>Recognise</span><span data-step='6'>Scale</span></div></aside>`);
+  document.body.insertAdjacentHTML('beforeend', `<div class='eco-cursor' aria-hidden='true'><i></i><b></b></div>`);
   const cursor = document.querySelector<HTMLElement>('.eco-cursor');
   if (cursor && window.matchMedia('(pointer:fine)').matches) {
     window.addEventListener('pointermove', event => { cursor.style.setProperty('--x', `${event.clientX}px`); cursor.style.setProperty('--y', `${event.clientY}px`); });
@@ -125,7 +125,7 @@ export function initExperienceShell() {
   }
 
   const nav = document.querySelector<HTMLElement>('.nav nav');
-  if (nav) nav.innerHTML = `<a href='#home'>Home</a><a href='#impact'>Impact</a><a href='#dashboard'>Dashboard</a><a href='#score'>Green Score</a><a href='#simulator'>Retail Lab</a><a href='#ethics'>Ethics</a><a href='#roadmap'>Roadmap</a>`;
+  if (nav) nav.innerHTML = `<a href='#home'>Home</a><a href='#impact'>Field Story</a><a href='#dashboard'>Field Data</a><a href='#score'>Green Score</a><a href='#decision'>Decision Lab</a><a href='#simulator'>3D Retail Lab</a><a href='#ethics'>Ethics</a><a href='#roadmap'>Roadmap</a>`;
   const navHeader = document.querySelector<HTMLElement>('.nav');
   navHeader?.insertAdjacentHTML('beforeend', `<button class='menu-toggle' id='menuToggle' type='button' aria-label='Open navigation'><span></span><span></span></button>`);
   document.querySelector<HTMLButtonElement>('#menuToggle')?.addEventListener('click', () => navHeader?.classList.toggle('menu-open'));
@@ -134,7 +134,7 @@ export function initExperienceShell() {
   const heroCopy = document.querySelector<HTMLElement>('.hero-grid > div:first-child');
   heroCopy?.insertAdjacentHTML('beforeend', `<div class='hero-profile'><img src='./eco-vyapar-profile.svg' alt='Conceptual ECO Vyapar sustainability-tech profile visual'><div><span>PROJECT IDENTITY</span><b>ECO Vyapar</b><small>Local retail · ethical sustainability · 2026</small></div></div>`);
   document.querySelector('.scene3d')?.insertAdjacentHTML('beforeend', `<div class='explore-label'>Drag / Move to Explore</div>`);
-  document.querySelector('.hero')?.insertAdjacentHTML('beforeend', `<div class='hero-stage-copy' id='heroStageCopy'><span>STAGE 01 · PLASTIC DEPENDENCE</span><strong>CONVENIENCE BECOMES HABIT.</strong></div><div class='hero-stage-rail' id='heroStageRail'><span class='active'>01 Plastic dependence</span><span>02 Awareness</span><span>03 Retailer action</span><span>04 Consumer participation</span><span>05 Green network</span></div>`);
+  document.querySelector('.hero')?.insertAdjacentHTML('beforeend', `<div class='hero-stage-copy' id='heroStageCopy'><span>STAGE 01 · PLASTIC DEPENDENCE</span><strong>CONVENIENCE BECOMES HABIT.</strong></div><div class='hero-stage-rail' id='heroStageRail'><span class='active'><b>01</b><small>Plastic dependence</small><em>Habit</em></span><span><b>02</b><small>Awareness</small><em>Visibility</em></span><span><b>03</b><small>Retailer action</small><em>Choice</em></span><span><b>04</b><small>Consumer participation</small><em>Demand</em></span><span><b>05</b><small>Green network</small><em>Scale</em></span></div>`);
 
   document.querySelector('#impact')?.insertAdjacentHTML('afterend', dashboardMarkup);
   document.querySelector('#lab')?.insertAdjacentHTML('afterend', `${checkoutMarkup}${simulatorMarkup}`);
