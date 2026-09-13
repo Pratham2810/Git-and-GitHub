@@ -1,0 +1,61 @@
+# Tests
+
+## Test 1 - Complete Green Score 2.0 and inspect recommendations [sanity]
+Viewport: desktop
+Covers: Green Score interaction, score category, radar chart, recommendations, Intelligence Console synchronization
+Description: Verifies the primary sustainability self-assessment updates all connected visual feedback without presenting the score as certification.
+
+Steps:
+1. Scroll to "How green is your shop?"
+2. Select the first four Green Score behaviours
+3. Inspect the score, category, radar chart and ECO Vyapar Intelligence Console
+
+Expected: The score reads 67, the category reads "Green Retailer", the radar chart visibly updates, and the Intelligence Console Green Score reads 67.
+
+## Test 2 - Configure the 3D Green Store simulator
+Viewport: desktop
+Covers: 3D retail transformation simulator, feature toggles, educational Green Readiness Score
+Description: Verifies store interventions alter the simulator state and calculate an educational readiness score.
+
+Steps:
+1. Scroll to "Build your green store."
+2. Turn off Plastic bags and turn on Paper alternatives, Reusable encouragement, Waste segregation and Efficient lighting
+3. Observe the toggle states and Green Readiness score
+
+Expected: The selected controls show ON, Plastic bags shows OFF, and the Green Readiness score is greater than 50 with the label "/100 · educational scenario" visible.
+
+## Test 3 - Change scenario inputs and impact horizon
+Viewport: desktop
+Covers: scenario calculator, dashboard Impact Horizon chart, scenario-vs-observed labeling
+Description: Verifies scenario analytics respond to calculator inputs while clearly identifying them as estimates.
+
+Steps:
+1. Set Customers per day to 100, Plastic bags per day to 60 and Reduction target to 50
+2. Scroll to the Field Impact Dashboard and select Annual in Impact Horizon
+3. Inspect the scenario chart and its note
+
+Expected: The daily scenario result is 30, the Impact Horizon chart updates, and the text "Scenario estimate — not an observed field outcome." remains visible.
+
+## Test 4 - Persist light theme after reload
+Viewport: mobile
+Covers: light/dark theme toggle, local theme persistence, responsive navigation
+Description: Verifies the intentional light theme can be selected on mobile and persists between visits.
+
+Steps:
+1. Use the theme toggle to switch to Light
+2. Refresh the page
+3. Open the mobile navigation menu
+
+Expected: The website remains in Light theme after refresh and the mobile menu reveals links including Dashboard and Retail Lab.
+
+## Test 5 - Submit the voluntary sustainability pledge
+Viewport: desktop
+Covers: pledge validation, consent acknowledgement, successful voluntary commitment state
+Description: Verifies the pledge requires acknowledgement and preserves non-certification framing.
+
+Steps:
+1. Scroll to "Turn awareness into commitment."
+2. Fill Shop name and Representative name, choose a Current bag type, and check the acknowledgement
+3. Submit the pledge
+
+Expected: "Welcome to the movement." is visible and the page continues to describe the commitment as student-led rather than official certification.
